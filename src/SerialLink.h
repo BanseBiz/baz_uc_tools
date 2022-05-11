@@ -9,7 +9,7 @@ class SerialLink : public Client
 private:
     HardwareSerial& _serial;
     unsigned long _baud;
-    static SemaphoreHandle_t _mtx;
+    SemaphoreHandle_t _mtx;
     bool _connected = false;
 public:
     SerialLink(HardwareSerial&, unsigned long);

@@ -1,7 +1,6 @@
 #pragma once
 
 #define LOGGER_BUFFER 256
-#define LOGGER_LEVEL 2
 
 #include <Client.h>
 #include <string.h>

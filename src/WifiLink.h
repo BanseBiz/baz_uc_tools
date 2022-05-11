@@ -12,7 +12,7 @@ private:
     WiFiClient _wifi;
     WifiMgr& _mgr;
     Logger& _log;
-    static SemaphoreHandle_t _mtx;
+    SemaphoreHandle_t _mtx;
 public:
     WifiLink(WifiMgr&, Logger&);
     int connect(const char*, uint16_t) override;

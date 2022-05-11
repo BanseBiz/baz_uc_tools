@@ -42,6 +42,7 @@ void Sink::loop() {
     xSemaphoreGive(_mtx);
     _pending.push_back(ss.str());
     if (!_uplink && !_uplink.connect(_host, _port)) {
+        _log.warn("SINK","offline, %d messages pending",_pending.size());
         return;
     }
     for (auto msg : _pending) {

@@ -4,7 +4,7 @@
 
 #include "WifiLink.h"
 
-SemaphoreHandle_t WifiLink::_mtx = NULL;
+//SemaphoreHandle_t WifiLink::_mtx = NULL;
 
 WifiLink::WifiLink(
     WifiMgr& mgr,

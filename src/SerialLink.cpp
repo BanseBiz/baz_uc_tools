@@ -2,7 +2,7 @@
 
 #include "SerialLink.h"
 
-SemaphoreHandle_t SerialLink::_mtx = NULL;;
+//SemaphoreHandle_t SerialLink::_mtx = NULL;
 
 SerialLink::SerialLink(
     HardwareSerial& serial,
@@ -18,14 +18,14 @@ SerialLink::SerialLink(
 void SerialLink::connect() {
     xSemaphoreTake(_mtx, portMAX_DELAY);
     _connected = true;
-    _serial.begin(_baud);
+    //_serial.begin(_baud);
     xSemaphoreGive(_mtx);
 }
 
 int SerialLink::connect(const char*, uint16_t) {
     xSemaphoreTake(_mtx, portMAX_DELAY);
     _connected = true;
-    _serial.begin(_baud);
+    _serial.begin(_baud, SERIAL_8N1);
     xSemaphoreGive(_mtx);
     return true;
 }
