@@ -3,6 +3,7 @@
 #define LOGGER_BUFFER 256
 
 #include <Client.h>
+#include <map>
 #include <string.h>
 #include <vector>
 #include "Worker.h"
@@ -22,8 +23,11 @@ class Logger : public Worker {
     void info(const char*, const char*, ...);
     void warn(const char*, const char*, ...);
     void error(const char*, const char*, ...);
+    void set(unsigned int, std::string);
+    std::string get(unsigned int);
   private:
     std::vector<std::string> _log;
+    std::map<unsigned int, std::string> _map;
     Client& _link;
     SemaphoreHandle_t _mtx;
     void loop() override;

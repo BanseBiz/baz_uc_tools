@@ -97,6 +97,14 @@ void Logger::error(const char* tag, const char* msg, ...) {
     xSemaphoreGive(_mtx);
 }
 
+void Logger::set(unsigned int ind, std::string val) {
+    _map[ind] = val;
+}
+
+std::string Logger::get(unsigned int ind) {
+    return _map[ind];
+}
+
 void Logger::loop() {
     xSemaphoreTake(_mtx, portMAX_DELAY);
     std::vector<std::string> log(_log);
