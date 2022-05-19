@@ -19,6 +19,7 @@ void WifiMgr::loop() {
         case WL_NO_SHIELD: 
         {
             _log.error("WIFI","no module");
+            _log.set(WIFI_STATUS_ID,"no module");
             return;
         }
         case WL_IDLE_STATUS:
@@ -29,30 +30,36 @@ void WifiMgr::loop() {
         case WL_NO_SSID_AVAIL:
         {
             _log.warn("WIFI","no ssid");
+            _log.set(WIFI_STATUS_ID,"no ssid");
             WiFi.begin(_ssid, _key);
             return;
         }
         case WL_SCAN_COMPLETED: 
             _log.info("WIFI","scan completed");
+            _log.set(WIFI_STATUS_ID,"scan");
             return;
         case WL_CONNECTED: 
             _log.debug("WIFI","connected");
+            _log.set(WIFI_STATUS_ID,"connected");
             return;
         case WL_CONNECT_FAILED:
         { 
             _log.warn("WIFI","connection failed");
+            _log.set(WIFI_STATUS_ID,"link fail");
             WiFi.begin(_ssid, _key);
             return;
         }
         case WL_CONNECTION_LOST: 
         {
             _log.warn("WIFI","connection lost");
+            _log.set(WIFI_STATUS_ID,"lost link");
             WiFi.begin(_ssid, _key);
             return;
         }
         case WL_DISCONNECTED: 
         {
             _log.warn("WIFI","disconnected");
+            _log.set(WIFI_STATUS_ID,"disconn");
             WiFi.begin(_ssid, _key);
             return;
         }

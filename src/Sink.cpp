@@ -1,5 +1,6 @@
 #include <Sink.h>
 #include <sstream>
+#include <string>
 
 #define SINK_RATE 0.1f
 #define SINK_STACK_SIZE 8192
@@ -43,11 +44,16 @@ void Sink::loop() {
     _pending.push_back(ss.str());
     if (!_uplink && !_uplink.connect(_host, _port)) {
         _log.warn("SINK","offline, %d messages pending",_pending.size());
+        char log_line[12];
+        sprintf(log_line,"%d msgs",_pending.size());
+        _log.set(SINK_STATUS_ID, log_line);
         return;
     }
     for (auto msg : _pending) {
         _uplink.write((const uint8_t*) msg.c_str(), msg.size());
     }
     _pending.clear();
+
+    _log.set(SINK_STATUS_ID, "online");
 }
 

@@ -5,6 +5,8 @@
 #include "Worker.h"
 #include "FreeRTOS.h"
 
+#define WIFI_STATUS_ID 0x00
+
 class WifiMgr : public Worker
 {
 private:
