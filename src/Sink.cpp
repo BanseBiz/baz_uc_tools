@@ -45,6 +45,10 @@ void Sink::loop() {
     if (!_uplink && !_uplink.connect(_host, _port)) {
         _log.warn("SINK","offline, %d messages pending",_pending.size());
         char log_line[12];
+        if (_pending.size() >= SINK_MAX_MSGS_PENDING) {
+            _pending.erase(_pending.begin());
+            _log.error("SINK","buffer full, dropped oldest msg");
+        }
         sprintf(log_line,"%d msgs",_pending.size());
         _log.set(SINK_STATUS_ID, log_line);
         return;

@@ -7,6 +7,7 @@
 #include <Logger.h>
 
 #define SINK_STATUS_ID 0x02
+#define SINK_MAX_MSGS_PENDING 96
 
 class Sink : public Worker {
   public:
