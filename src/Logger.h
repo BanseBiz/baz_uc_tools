@@ -1,6 +1,7 @@
 #pragma once
 
 #define LOGGER_BUFFER 256
+#define LOGGER_LEVEL 1
 
 #include <Client.h>
 #include <map>
@@ -25,10 +26,12 @@ class Logger : public Worker {
     void error(const char*, const char*, ...);
     void set(unsigned int, std::string);
     std::string get(unsigned int);
+    uint16_t getErrCnt();
   private:
     std::vector<std::string> _log;
     std::map<unsigned int, std::string> _map;
     Client& _link;
     SemaphoreHandle_t _mtx;
     void loop() override;
+    uint16_t _err_cnt;
 };

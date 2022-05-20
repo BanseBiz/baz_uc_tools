@@ -85,6 +85,7 @@ void Logger::warn(const char* tag, const char* msg, ...) {
 }
 
 void Logger::error(const char* tag, const char* msg, ...) {
+    _err_cnt++;
     va_list vl;
     va_start(vl,msg);
     char message[LOGGER_BUFFER];
@@ -118,4 +119,8 @@ void Logger::loop() {
     
     std::string output = ss.str();
     _link.write((const uint8_t*) output.c_str(), output.size());
+}
+
+uint16_t Logger::getErrCnt() {
+    return _err_cnt;
 }
