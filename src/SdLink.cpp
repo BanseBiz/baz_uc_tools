@@ -1,7 +1,4 @@
 #include <SdLink.h>
-#include "FS.h"
-#include "SD.h"
-#include "SPI.h"
 
 SdLink::SdLink(
     const char* path_read,

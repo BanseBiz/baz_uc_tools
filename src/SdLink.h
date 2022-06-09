@@ -2,8 +2,8 @@
 
 #include <Client.h>
 #include <Logger.h>
-#include "SD.h"
-#include "SPI.h"
+#include <SD.h>
+#include <SPI.h>
 
 class SdLink : public Client
 {
