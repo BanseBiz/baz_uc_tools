@@ -2,6 +2,7 @@
 
 #include <Client.h>
 #include <Logger.h>
+//#include "/home/banse/.platformio/packages/framework-arduinoespressif32/libraries/SD/src/SD.h"
 #include <SD.h>
 #include <SPI.h>
 
@@ -10,12 +11,12 @@ class SdLink : public Client
 private:
     const char* _path_read;
     const char* _path_write;
-    SPIClass& _spi;
     fs::SDFS& _sd;
+    SPIClass& _spi;
     Logger& _log;
     SemaphoreHandle_t _mtx;
 public:
-    SdLink(const char*,const char*, fs::SDFS&, SPIClass&, Logger&);
+    SdLink(const char*, const char*, fs::SDFS&, SPIClass&, Logger&);
     void connect();
     int connect(const char*, uint16_t) override;
     int connect(IPAddress ip, uint16_t port) override;
