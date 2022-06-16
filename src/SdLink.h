@@ -16,6 +16,7 @@ private:
     SPIClass& _spi;
     Logger& _log;
     SemaphoreHandle_t _mtx;
+    bool _init = false;
 public:
     SdLink(const char*, const char*, int, fs::SDFS&, SPIClass&, Logger&);
     void connect();
