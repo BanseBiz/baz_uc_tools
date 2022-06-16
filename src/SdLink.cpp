@@ -3,11 +3,13 @@
 SdLink::SdLink(
     const char* path_read,
     const char* path_write,
+    int cs_pin,
     fs::SDFS& sdfs,
     SPIClass& spi,
     Logger& log
 ) : _path_read(path_read),
     _path_write(path_write),
+    _cs_pin(cs_pin),
     _sd(sdfs),
     _spi(spi),
     _log(log)
@@ -18,17 +20,17 @@ SdLink::SdLink(
 }
 
 void SdLink::connect() {
-    _sd.begin(5);
+    _sd.begin(_cs_pin);
 }
 
 int SdLink::connect(const char* path, uint16_t mode) {
     _path_read = path;
     _path_write = path;
-    return _sd.begin(5) && SdLink::connected();
+    return _sd.begin(_cs_pin) && SdLink::connected();
 }
 
 int SdLink::connect(IPAddress, uint16_t) {
-    return _sd.begin(5) && SdLink::connected();
+    return _sd.begin(_cs_pin) && SdLink::connected();
 }
 
 size_t SdLink::write(uint8_t byte) {

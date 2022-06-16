@@ -11,12 +11,13 @@ class SdLink : public Client
 private:
     const char* _path_read;
     const char* _path_write;
+    const int _cs_pin;
     fs::SDFS& _sd;
     SPIClass& _spi;
     Logger& _log;
     SemaphoreHandle_t _mtx;
 public:
-    SdLink(const char*, const char*, fs::SDFS&, SPIClass&, Logger&);
+    SdLink(const char*, const char*, int, fs::SDFS&, SPIClass&, Logger&);
     void connect();
     int connect(const char*, uint16_t) override;
     int connect(IPAddress ip, uint16_t port) override;
