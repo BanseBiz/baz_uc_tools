@@ -24,12 +24,23 @@ bool Sink::write(std::string& msg) {
     xSemaphoreTake(_mtx, portMAX_DELAY);
     _data.push_back(msg);
     xSemaphoreGive(_mtx);
+    if (_next != nullptr) {
+        _next->write(msg);
+    }
     return true;
 }
 
 bool Sink::write(const char* data, size_t size) {
     std::string msg(data, size);
     return write(msg);
+}
+
+bool Sink::append(Sink* next) {
+    if (_next != nullptr) {
+        return false;
+    }
+    _next = next;
+    return true;
 }
 
 void Sink::loop() {

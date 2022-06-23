@@ -15,6 +15,7 @@ class Sink : public Worker {
     void init() override;
     bool write(std::string&);
     bool write(const char*, size_t);
+    bool append(Sink*);
   private:
     void loop() override;
     std::vector<std::string> _data;
@@ -25,4 +26,5 @@ class Sink : public Worker {
     size_t _stack_size = 0;
     const char* _host;
     const uint16_t _port;
+    Sink* _next = nullptr;
 };
