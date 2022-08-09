@@ -12,7 +12,7 @@
 #define PIN_O4 33
 
 #define PIN_MOSI 23
-#define PIN MISO 19
+#define PIN_MISO 19
 #define PIN_CLK 18
 #define PIN_CS1 5
 #define PIN_CS2 15
