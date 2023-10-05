@@ -11,6 +11,7 @@ WifiMgr::WifiMgr(const char* ssid, const char* key, Logger& log
 }
 
 void WifiMgr::init() {
+    WiFi.mode(WIFI_STA);
     WiFi.begin(_ssid, _key);
 }
 
@@ -24,6 +25,7 @@ void WifiMgr::loop() {
         }
         case WL_IDLE_STATUS:
         {
+            WiFi.mode(WIFI_STA);
             WiFi.begin(_ssid, _key);
             return;
         }
@@ -31,6 +33,7 @@ void WifiMgr::loop() {
         {
             _log.warn("WIFI","no ssid");
             _log.set(WIFI_STATUS_ID,"no ssid");
+            WiFi.mode(WIFI_STA);
             WiFi.begin(_ssid, _key);
             return;
         }
@@ -46,6 +49,7 @@ void WifiMgr::loop() {
         { 
             _log.warn("WIFI","connection failed");
             _log.set(WIFI_STATUS_ID,"link fail");
+            WiFi.mode(WIFI_STA);
             WiFi.begin(_ssid, _key);
             return;
         }
@@ -53,6 +57,7 @@ void WifiMgr::loop() {
         {
             _log.warn("WIFI","connection lost");
             _log.set(WIFI_STATUS_ID,"lost link");
+            WiFi.mode(WIFI_STA);
             WiFi.begin(_ssid, _key);
             return;
         }
@@ -60,6 +65,7 @@ void WifiMgr::loop() {
         {
             _log.warn("WIFI","disconnected");
             _log.set(WIFI_STATUS_ID,"disconn");
+            WiFi.mode(WIFI_STA);
             WiFi.begin(_ssid, _key);
             return;
         }
