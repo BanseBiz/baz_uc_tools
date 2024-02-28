@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-#define SINK_RATE 0.1f
+#define SINK_RATE 1.0f
 #define SINK_STACK_SIZE 8192
 
 Sink::Sink(const char* host, uint16_t port, Client& client, Logger& log)
