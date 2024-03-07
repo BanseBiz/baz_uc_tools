@@ -2,7 +2,7 @@
 #include <sstream>
 #include <string>
 
-#define SINK_RATE 1.0f
+#define SINK_RATE 10.0f
 #define SINK_STACK_SIZE 8192
 
 Sink::Sink(const char* host, uint16_t port, Client& client, Logger& log)
@@ -34,6 +34,10 @@ bool Sink::write(const char* data, size_t size) {
 
 void Sink::loop() {
     xSemaphoreTake(_mtx, portMAX_DELAY);
+    if (_data.empty()) {
+        xSemaphoreGive(_mtx);
+        return;
+    }
     std::vector<std::string> pending(_data);
     std::stringstream ss;
     for (auto msg : _data) {
