@@ -1,6 +1,6 @@
 #define INCLUDE_vTaskSuspend 1
 #define WIFI_STACK_SIZE 8196
-#define WIFI_RATE 0.25f //hz
+#define WIFI_RATE .1f //hz
 
 #include "WifiMgr.h"
 

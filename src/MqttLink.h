@@ -2,6 +2,7 @@
 
 #include <Client.h>
 #include <PubSubClient.h>
+#include <map>
 
 struct mqtt_config_t
 {
@@ -19,11 +20,9 @@ struct mqtt_config_t
 
 class MqttLink : public Client
 {
-private:
-    mqtt_config_t& _config;
-    PubSubClient _client;
     
 public:
+    typedef void (*sub_func_t)(uint8_t*,unsigned int);
     MqttLink(mqtt_config_t&, Client&);
     int connect();
     int connect(const char*, uint16_t) override;
@@ -38,4 +37,12 @@ public:
     void stop() override;
     uint8_t connected() override;
     operator bool() override;
+    void subscibe(std::string, sub_func_t);
+
+    private:
+    mqtt_config_t& _config;
+    PubSubClient _client;
+    static std::map<std::string,sub_func_t> subTopics;
+
+    static void callback(char*, uint8_t*, unsigned int);
 };

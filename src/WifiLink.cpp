@@ -109,3 +109,7 @@ uint8_t WifiLink::connected() {
 WifiLink::operator bool() {
     return _mgr.isUp() && _wifi.connected();
 }
+
+WiFiClient& WifiLink::getClient() {
+    return _wifi;
+}

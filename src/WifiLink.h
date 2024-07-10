@@ -27,4 +27,5 @@ public:
     void stop() override;
     uint8_t connected() override;
     operator bool() override;
+    WiFiClient& getClient();
 };
